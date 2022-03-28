@@ -40,18 +40,11 @@ class _HomePageState extends State<HomePage> {
         ),
         ),
       ),
-      //body
-      body: ListView(
-        children: [
-          Padding(padding: EdgeInsets.all(8),
-          child: Row(
-            children: [
-              Expanded(child: CardProductHome()),
-            ],
-          ),
-          ),
-        ],
-      ),
+      
+         //body
+      body: Container(
+        child: ListViewPage(),
+      ), 
 
       // menu
       endDrawer: Drawer(
