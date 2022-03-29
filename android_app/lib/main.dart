@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'homePage/card_product_home.dart';
-import 'navBar/header_drawer.dart';
+import 'utils/constants/theme.dart';
+import 'views/login/login_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,53 +12,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false, 
-      theme: ThemeData(
-        primaryColor: Colors.lightBlue
-      ),
-      home: HomePage(),
+      title: 'FINDEX',
+      theme: CustomTheme.lightTheme,
+      home: const LoginView(),
     );
   }
 }
-
-class HomePage extends StatefulWidget {
-  const HomePage({ Key? key }) : super(key: key);
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blue,
-        title: Text('FINDEX', style: TextStyle(
-          color: Colors.black
-        ),
-        ),
-      ),
-      
-         //body
-      body: Container(
-        child: ListViewPage(),
-      ), 
-
-      // menu
-      endDrawer: Drawer(
-        child: SingleChildScrollView(
-          child: Container(
-            child: Column(
-              children: [
-                HeaderDrawer(),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-
