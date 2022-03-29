@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../widgets/header_drawer.dart';
-import 'card_product_home.dart';
+import 'item_list_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key, String? secretRecoveyPhrase}) : super(key: key);
@@ -15,19 +15,13 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
         title: const Text(
           'FINDEX',
-          style: TextStyle(color: Colors.black),
         ),
       ),
-
-      //body
       body: Container(
-        child: const ListViewPage(),
+        child: const ItemListView(),
       ),
-
-      // menu
       endDrawer: Drawer(
         child: SingleChildScrollView(
           child: Container(
