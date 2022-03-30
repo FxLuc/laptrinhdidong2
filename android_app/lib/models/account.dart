@@ -9,14 +9,13 @@ class AccountModel {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['address'] = address;
     data['mnemonic'] = mnemonic;
-    data['privateKey'] = privateKey;
     return data;
   }
-  
+
   AccountModel.fromJson(Map<String, dynamic> json) {
     address = json['address'];
     mnemonic = json['mnemonic'];
-    privateKey = json['privateKey'];
+    return data;
   }
 
 }
