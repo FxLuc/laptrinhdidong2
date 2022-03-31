@@ -1,5 +1,5 @@
 import 'package:android_app/utils/constants/theme.dart';
-import 'package:android_app/views_model/home/item_list_view_model.dart';
+import 'package:android_app/views_model/search/search_item_list_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:scroll_app_bar/scroll_app_bar.dart';
 import '../../models/item_post.dart';
@@ -7,20 +7,35 @@ import '../../widgets/circular_progress_indicator.dart';
 import '../main_screen.dart';
 import '../../widgets/item_card.dart';
 
-class HomeView extends StatefulWidget {
-  const HomeView({Key? key}) : super(key: key);
+class SearchView extends StatefulWidget {
+  const SearchView({Key? key}) : super(key: key);
   @override
-  State<HomeView> createState() => _HomeViewState();
+  State<SearchView> createState() => _SearchViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _SearchViewState extends State<SearchView> {
   late Future<List<ItemPost>> itemList;
   final controller = ScrollController();
+  final _searchController = TextEditingController();
+  String? searchValue;
+
+  void onSearchHandler(String value) {
+    setState(() {
+      searchValue = _searchController.text;
+      itemList = searchItemList(value);
+    });
+  }
 
   @override
   initState() {
     super.initState();
-    itemList = getItemListNewest();
+    final MainScreenState? mainScreenState =
+        context.findAncestorStateOfType<MainScreenState>();
+    final _searchValueFromHome = mainScreenState!.searchValue;
+    onSearchHandler(_searchValueFromHome ?? "");
+    _searchController.text = _searchValueFromHome ?? "";
+    searchValue = _searchValueFromHome ?? "";
+    itemList = searchItemList(_searchController.text);
   }
 
   @override
@@ -62,8 +77,6 @@ class _HomeViewState extends State<HomeView> {
   }
 
   ScrollAppBar searchBar() {
-    final MainScreenState? _homeViewState =
-        context.findAncestorStateOfType<MainScreenState>();
     return ScrollAppBar(
       controller: controller,
       automaticallyImplyLeading: false,
@@ -75,8 +88,7 @@ class _HomeViewState extends State<HomeView> {
           onSubmitted: (value) {
             value.isNotEmpty
                 ? {
-                    _homeViewState!.onSearchHandler(value),
-                    _homeViewState.onTapHandler(1),
+                    onSearchHandler(value),
                   }
                 : {};
           },
