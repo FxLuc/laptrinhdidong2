@@ -12,8 +12,6 @@ Future<ItemDetail> getItemDetail(address) async {
         {"_id": address},
       ),
     );
-    print(address);
-    print(response.body);
     final itemDetail = ItemDetail.fromJson(json.decode(response.body));
     // final response = await http.get(Uri.parse(ApiEnpoint.itemNewest));
     return itemDetail;
